@@ -13,5 +13,21 @@ namespace VendingMachines
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            //try
+            //{
+            //    var aw = new View.Windows.Authorization()
+            //    {
+            //        DataContext = new ViewModels.AuthorizationViewModel()
+            //    };
+            //    aw.Show();
+            //}
+            //catch (Exception)
+            //{
+
+            //    throw;
+            //}
+        }
     }
 }
