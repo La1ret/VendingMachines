@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace VendingMachines.View.Pages
+namespace VendingMachines.Views.Pages
 {
     /// <summary>
     /// Логика взаимодействия для Page2.xaml

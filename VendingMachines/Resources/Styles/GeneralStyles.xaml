@@ -4,16 +4,20 @@
 
     <Style TargetType="{x:Type Control}">
         <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="False">
-                <Setter Property="BorderBrush" Value="Gray" />
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="BorderBrush" Value="DarkGray" />
+                <Setter Property="Foreground" Value="#777777" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="True">
+                <Setter Property="BorderBrush" Value="DimGray" />
                 <Setter Property="Foreground" Value="#444444" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="BorderBrush" Value="Gray" />
+                <Setter Property="BorderBrush" Value="DimGray" />
                 <Setter Property="Foreground" Value="#222222" />
             </Trigger>
             <Trigger Property="IsFocused" Value="True">
-                <Setter Property="BorderBrush" Value="DimGray" />
+                <Setter Property="BorderBrush" Value="#444444" />
                 <Setter Property="Foreground" Value="Black" />
             </Trigger>
         </Style.Triggers>
@@ -63,7 +67,6 @@
     <Style TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource {x:Type Control}}">
         <Setter Property="FontSize" Value="23"/>
         <Setter Property="BorderThickness" Value="0,0,0,2"/>
-        <Setter Property="h:PswBoxHelper.ObservePassword" Value="True"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Template" Value="{DynamicResource PswBoxWithPlaceholderCT}"/>
@@ -90,7 +93,7 @@
         </Border>
 
         <ControlTemplate.Triggers>
-            <Trigger Property="h:PswBoxHelper.IsPasswordEmpty" Value="True">
+            <Trigger Property="h:PasswordBoxHelper.IsPasswordEmpty" Value="True">
                 <Setter Property="Visibility" TargetName="plaseholder" Value="Visible"/>
             </Trigger>
         </ControlTemplate.Triggers>
@@ -142,12 +145,21 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style x:Key="LinkButton" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+    <Style x:Key="LinkButton" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Control}}">
         <Setter Property="BorderBrush" Value="Gray"/>
         <Setter Property="BorderThickness" Value="0,0,0,1"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="Gray"/>
         <Setter Property="Margin" Value="0, 3, 5, 2"/>
+    </Style>
+
+    <Style TargetType="{x:Type ToggleButton}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="2,0,0,0"/>
+        <Setter Property="BorderBrush" Value="DarkGray"/>
+        <Setter Property="Margin" Value="5,0,0,0"/>
     </Style>
     
 </ResourceDictionary>
