@@ -58,7 +58,6 @@ namespace VendingMachines.Services
 
         #region Переменные
 
-        private bool isWillLocked;
         private int _failedLoginAttempts = 0;
         #endregion
 

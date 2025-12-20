@@ -23,7 +23,7 @@ namespace VendingMachines
     public partial class App : Application
     {
 
-        private ServiceProvider serviceProvider;
+        private readonly ServiceProvider serviceProvider;
 
         public App()
         {
@@ -34,7 +34,7 @@ namespace VendingMachines
             InitializeComponent();
         }
 
-        protected override async void OnStartup(StartupEventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 

@@ -36,7 +36,6 @@ namespace VendingMachines.ViewModels
 
         private bool _windowIsEnabled;
         private string _authStatusMessage = "";
-        private string _authorizationError = "";
         private string _username = "";
         private string _password = null;
         private bool _isPasswordFieldsEnabled;
@@ -45,8 +44,8 @@ namespace VendingMachines.ViewModels
         private ImageSource _visibilityToggleImage = (ImageSource)IMG_HIDDEN;
 
         ///<summary> CONST значений изображения переключателя </summary>
-        private static object IMG_VISIBLE = new BitmapImage(new Uri("pack://application:,,,/Resources/Assets/Visible.png", UriKind.Absolute));
-        private static object IMG_HIDDEN = new BitmapImage(new Uri("pack://application:,,,/Resources/Assets/Hidden.png", UriKind.Absolute));
+        private static readonly object IMG_VISIBLE = new BitmapImage(new Uri("pack://application:,,,/Resources/Assets/Visible.png", UriKind.Absolute));
+        private static readonly object IMG_HIDDEN = new BitmapImage(new Uri("pack://application:,,,/Resources/Assets/Hidden.png", UriKind.Absolute));
         #endregion
 
         #region Инициализация
