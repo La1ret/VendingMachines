@@ -1,4 +1,5 @@
-﻿using System;
+﻿using VendingMachines.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,13 +17,15 @@ using System.Windows.Shapes;
 namespace VendingMachines.Views.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для Page2.xaml
+    /// Логика взаимодействия для AuthPage.xaml
     /// </summary>
-    public partial class Page2 : Page
+    public partial class AuthPage : Page
     {
-        public Page2()
+        public AuthPage(AuthPageViewModel viewModel)
         {
             InitializeComponent();
+
+            DataContext = viewModel;
         }
     }
 }

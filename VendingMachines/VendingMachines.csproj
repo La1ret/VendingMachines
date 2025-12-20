@@ -162,12 +162,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Common\OperationResult.cs" />
     <Compile Include="Common\PasswordHasher.cs" />
+    <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Data\Interfaces\IRoleRepository.cs" />
     <Compile Include="Data\Interfaces\IUserRepository.cs" />
     <Compile Include="Data\Repositories\RoleRepository.cs" />
     <Compile Include="Data\Repositories\UserRepository.cs" />
-    <Compile Include="Helpers\PasswordBoxHelper.cs" />
+    <Compile Include="Common\Helpers\PasswordBoxHelper.cs" />
     <Compile Include="Data\VendingMachinesDbContext.cs" />
     <Compile Include="Migrations\202512141629217_InitialSchema.cs" />
     <Compile Include="Migrations\202512141629217_InitialSchema.Designer.cs">
@@ -176,25 +178,45 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Services\AuthentificationService.cs" />
-    <Compile Include="Services\Interfaces\INavigationService.cs" />
+    <Compile Include="Services\AuthService.cs" />
+    <Compile Include="Services\interfaces\IAuthentificationService.cs" />
+    <Compile Include="Services\interfaces\INavigationService.cs" />
+    <Compile Include="Services\interfaces\IUserService.cs" />
+    <Compile Include="Services\interfaces\IUserSessionService.cs" />
     <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="Services\UserSessionService.cs" />
     <Compile Include="Services\_JwtService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="ViewModels\AuthorizationViewModel.cs" />
-    <Compile Include="ViewModels\VMBase\ViewModelBase.cs" />
+    <Compile Include="Common\ViewModelBase.cs" />
+    <Compile Include="ViewModels\AuthPageViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="Views\Pages\OnFuture.xaml.cs">
-      <DependentUpon>OnFuture.xaml</DependentUpon>
+    <Compile Include="ViewModels\PasswordRecoveryViewModel.cs" />
+    <Compile Include="ViewModels\PegistrationViewModel.cs" />
+    <Compile Include="Views\Pages\AuthPage.xaml.cs">
+      <DependentUpon>AuthPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\PasswordRecovery.xaml.cs">
+      <DependentUpon>PasswordRecovery.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\Registration.xaml.cs">
+      <DependentUpon>Registration.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\Authorization.xaml.cs">
       <DependentUpon>Authorization.xaml</DependentUpon>
     </Compile>
-    <Page Include="Resources\Styles\GeneralStyles.xaml">
-      <SubType>Designer</SubType>
+    <Compile Include="Views\Windows\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Resources\Styles\BaseStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Windows\MainWindow.xaml">
+    <Page Include="Resources\Styles\ControlTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\NamedStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -202,17 +224,25 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\Windows\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="Views\Pages\OnFuture.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Views\Pages\AuthPage.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pages\PasswordRecovery.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pages\Registration.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Windows\Authorization.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Windows\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

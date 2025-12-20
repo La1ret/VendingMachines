@@ -14,14 +14,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace VendingMachines.Views.Windows
+namespace VendingMachines.Views.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для Registration.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Registration : Page
     {
-        public MainWindow(MainWindowViewModel viewModel)
+        public Registration(PegistrationViewModel viewModel)
         {
             InitializeComponent();
 

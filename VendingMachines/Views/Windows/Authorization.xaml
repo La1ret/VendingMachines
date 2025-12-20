@@ -6,80 +6,8 @@
         xmlns:h="clr-namespace:VendingMachines.Helpers"
         xmlns:local="clr-namespace:VendingMachines.Views.Windows"
         mc:Ignorable="d"
-        Title="Authorization" Height="450" Width="800"
-        >
-    <Grid Background="#99ccd1">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.2*"/>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="0.2*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="4.5*"/>
-            <RowDefinition Height="0.5*"/>
-        </Grid.RowDefinitions>
-
-        <TextBlock HorizontalAlignment="Center" Text="Вход" Grid.Column="1" Grid.Row="1"/>
-
-        <Grid Grid.Column="1" Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="0.3*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="0.2*"/>
-                <RowDefinition Height="0.5*"/>
-                <RowDefinition Height="0.2*"/>
-                <RowDefinition Height="2*"/>
-            </Grid.RowDefinitions>
-
-            <TextBox x:Name="txt_UserName"
-                     ToolTip="Пользователь"
-                     Grid.Row="0" Grid.Column="0"
-                     Grid.ColumnSpan="2" 
-                     Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"/>
-
-            <PasswordBox x:Name="pwd_Password"
-                         ToolTip="Пароль"
-                         Grid.Row="1" Grid.Column="0"
-                         h:PasswordBoxHelper.Password="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
-                         IsEnabled="{Binding IsPasswordFieldsEnabled, UpdateSourceTrigger=PropertyChanged}"
-                         Visibility="{Binding IsPasswordBoxVisible}"/>
-            
-            <TextBox x:Name="txt_Password"
-                     ToolTip="Пароль"
-                     Grid.Row="1" Grid.Column="0"
-                     Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
-                     IsEnabled="{Binding IsPasswordFieldsEnabled}"
-                     Visibility="{Binding IsPasswordTextBoxVisible}"/>
-            
-            <ToggleButton x:Name="tog_Password"
-                          Grid.Row="1" Grid.Column="1"
-                          IsChecked="{Binding IsPasswordVisible, UpdateSourceTrigger=PropertyChanged}"
-                          IsEnabled="{Binding IsPasswordFieldsEnabled}">
-                <Image Source="{Binding VisibilityToggleImage}" />
-            </ToggleButton>
-
-            <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-
-                <CheckBox x:Name="chk_RememberMe" Content="Запомнить меня" Grid.Column="0"/>
-                <Button x:Name="btn_ForgotPassword" Content="Забыли пароль?" Grid.Column="2"
-                Style="{StaticResource LinkButton}"/>
-            </Grid>
-            
-            <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Width="350">
-                <Button x:Name="btn_SignIn" Content="Войти" Margin="0,15" IsEnabled="{Binding IsSignInButtonEnabled}"/>
-                <Button x:Name="btn_SignUp" Content="Зарегистрироваться" Margin="0,15"/>
-            </StackPanel>
-        </Grid>
+        Title="Authorization" WindowState="Maximized">
+    <Grid Style="{StaticResource MainBackgroundStyle}">
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Height="550" Width="800"/>
     </Grid>
 </Window>

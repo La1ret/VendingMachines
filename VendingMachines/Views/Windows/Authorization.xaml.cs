@@ -1,5 +1,10 @@
-﻿using System;
+﻿using VendingMachines.Helpers;
+using VendingMachines.Services.Interfaces;
+using VendingMachines.ViewModels;
+using VendingMachines.Views.Pages;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,9 +16,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using VendingMachines.Helpers;
-using VendingMachines.ViewModels;
-using VendingMachines.Services.Interfaces;
 
 namespace VendingMachines.Views.Windows
 {
@@ -22,12 +24,14 @@ namespace VendingMachines.Views.Windows
     /// </summary>
     public partial class Authorization : Window
     {
-        public Authorization(AuthorizationViewModel viewModel)
+        public Authorization(AuthorizationViewModel viewModel, INavigationService navigationService)
         {
             InitializeComponent();
-
+             
             DataContext = viewModel;
-        }
 
+            navigationService.SetFrame(this.MainFrame);
+            navigationService.NavigateToPage<AuthPage>();
+        }
     }
 }

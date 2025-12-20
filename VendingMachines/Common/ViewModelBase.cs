@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 using System.Web;
 
-namespace VendingMachines.ViewModels
+namespace VendingMachines.Common
 {
     public abstract class ViewModelBase : INotifyPropertyChanged
     {
