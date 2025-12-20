@@ -26,10 +26,11 @@ namespace VendingMachines.ViewModels
 
         #region Объявление команд
 
+        public ICommand ChangePasswordVisibility { get; }
+        public ICommand ShowForgotPasswordCommand { get; }
         public ICommand SignInCommand { get; }
         public ICommand SignUpCommand { get; }
-        public ICommand ChangePasswordVisibility {  get; }
-        public ICommand ShowForgotPasswordCommand { get; }
+        public ICommand EnterLikeGuestCommand { get; }
         #endregion
 
         #region Объявление полей и контант
@@ -71,6 +72,7 @@ namespace VendingMachines.ViewModels
             SignUpCommand = new RelayCommand(OnSignUpCommandExecute);
             ChangePasswordVisibility = new RelayCommand(OnChangePasswordVisibilityExecute, CanChangePasswordVisibilityExecute);
             ShowForgotPasswordCommand = new RelayCommand(OnShowForgotPasswordCommandExecute);
+            EnterLikeGuestCommand = new RelayCommand(OnEnterLikeGuestCommandExecute);
         }
         #endregion
 
@@ -223,6 +225,14 @@ namespace VendingMachines.ViewModels
         private void OnShowForgotPasswordCommandExecute(object p)
         {
             _navigationService.NavigateToPage<PasswordRecovery>();
+        }
+        #endregion
+
+        #region Команда входа без аутентификации
+
+        private void OnEnterLikeGuestCommandExecute(object p)
+        {
+            VendingMachines.Services.Class1.Button_Click();
         }
         #endregion
     }
