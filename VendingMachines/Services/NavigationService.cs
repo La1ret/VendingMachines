@@ -1,4 +1,4 @@
-﻿using VendingMachines.Services.Interfaces;
+﻿using VendingMachines.Application.IServices;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;

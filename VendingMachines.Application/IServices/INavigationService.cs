@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace VendingMachines.Services.Interfaces
+namespace VendingMachines.Application.IServices
 {
     public interface INavigationService
     {

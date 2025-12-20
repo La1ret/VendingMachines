@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VendingMachines.Services.Interfaces
+namespace VendingMachines.Application.IServices
 {
     public interface IUserService
     {

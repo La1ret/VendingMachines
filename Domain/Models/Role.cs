@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VendingMachines.Models
+namespace VendingMachines.Domain.Models
 {
     public class Role
     {

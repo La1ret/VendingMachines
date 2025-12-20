@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VendingMachines.Common
+namespace VendingMachines.Infrastructure.Authentication
 {
     internal class PasswordHasher
     {

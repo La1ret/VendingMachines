@@ -116,8 +116,8 @@
     <Reference Include="System.Data.SQLite, Version=1.0.119.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\lib\net46\System.Data.SQLite.dll</HintPath>
     </Reference>
-    <Reference Include="System.Data.SQLite.EF6, Version=1.0.119.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.119.0\lib\net46\System.Data.SQLite.EF6.dll</HintPath>
+    <Reference Include="System.Data.SQLite.EF6, Version=2.0.2.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.EF6.2.0.2\lib\net471\System.Data.SQLite.EF6.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.SQLite.EF6.Migrations, Version=1.0.113.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SQLite.EF6.Migrations.1.0.113\lib\System.Data.SQLite.EF6.Migrations.dll</HintPath>
@@ -168,34 +168,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Common\OperationResult.cs" />
-    <Compile Include="Common\PasswordHasher.cs" />
-    <Compile Include="Common\RelayCommand.cs" />
+    <Compile Include="Common\UI-Base\RelayCommand.cs" />
     <Compile Include="Data\Interfaces\IRoleRepository.cs" />
     <Compile Include="Data\Interfaces\IUserRepository.cs" />
     <Compile Include="Data\Repositories\RoleRepository.cs" />
     <Compile Include="Data\Repositories\UserRepository.cs" />
-    <Compile Include="Common\Helpers\PasswordBoxHelper.cs" />
+    <Compile Include="Common\UI-Helpers\PasswordBoxHelper.cs" />
     <Compile Include="Data\VendingMachinesDbContext.cs" />
     <Compile Include="Migrations\202512141629217_InitialSchema.cs" />
     <Compile Include="Migrations\202512141629217_InitialSchema.Designer.cs">
       <DependentUpon>202512141629217_InitialSchema.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Role.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Services\AuthService.cs" />
-    <Compile Include="Services\Class1.cs" />
-    <Compile Include="Services\interfaces\IAuthentificationService.cs" />
-    <Compile Include="Services\interfaces\INavigationService.cs" />
-    <Compile Include="Services\interfaces\IUserService.cs" />
-    <Compile Include="Services\interfaces\IUserSessionService.cs" />
     <Compile Include="Services\NavigationService.cs" />
-    <Compile Include="Services\UserSessionService.cs" />
-    <Compile Include="Services\_JwtService.cs" />
-    <Compile Include="Services\UserService.cs" />
     <Compile Include="ViewModels\AuthorizationViewModel.cs" />
-    <Compile Include="Common\ViewModelBase.cs" />
+    <Compile Include="Common\UI-Base\ViewModelBase.cs" />
     <Compile Include="ViewModels\AuthPageViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\PasswordRecoveryViewModel.cs" />
@@ -286,6 +274,10 @@
     <ProjectReference Include="..\Domain\VendingMachines.Domain.csproj">
       <Project>{8fc30623-74f7-43c2-84ab-c8283b01f153}</Project>
       <Name>VendingMachines.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VendingMachines.Application\VendingMachines.Application.csproj">
+      <Project>{3b93a5e6-2d2d-405d-873c-e196dc25ccce}</Project>
+      <Name>VendingMachines.Application</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

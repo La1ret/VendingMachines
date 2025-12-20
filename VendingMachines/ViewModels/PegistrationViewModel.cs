@@ -1,7 +1,4 @@
-﻿using VendingMachines.Common;
-using VendingMachines.Services.Interfaces;
-using VendingMachines.Views.Pages;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +7,10 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using VendingMachines.Common;
+using VendingMachines.Services.Interfaces;
+using VendingMachines.Views.Pages;
+using VendingMachines.Views.Windows;
 
 namespace VendingMachines.ViewModels
 {
@@ -146,6 +147,7 @@ namespace VendingMachines.ViewModels
             if (result.IsSuccess)
             {
                 RegistrationStatusMessage = "Производится вход в систему...";
+                _navigationService.ChangeWindowTo<MainWindow>();
             }
             else 
             {

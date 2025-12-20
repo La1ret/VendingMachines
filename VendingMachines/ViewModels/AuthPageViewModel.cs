@@ -1,9 +1,4 @@
-﻿using VendingMachines.Common;
-using VendingMachines.Models;
-using VendingMachines.Services;
-using VendingMachines.Services.Interfaces;
-using VendingMachines.Views.Pages;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +7,12 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using VendingMachines.Common;
+using VendingMachines.Models;
+using VendingMachines.Services;
+using VendingMachines.Services.Interfaces;
+using VendingMachines.Views.Pages;
+using VendingMachines.Views.Windows;
 
 namespace VendingMachines.ViewModels
 {
@@ -196,7 +197,11 @@ namespace VendingMachines.ViewModels
             await Task.Delay(150); //Для того чтоб пользователь видел что сообщение сменилось (если на такое же)
 
             var result = await _authService.AuthenticateAsync(_username, _password);
-            if (!result.IsSuccess) 
+            if (result.IsSuccess)
+            {
+                _navigationService.ChangeWindowTo<MainWindow>();
+            }
+            else 
             {
                 AuthStatusMessage = result.Message;
             }

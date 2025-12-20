@@ -4,10 +4,33 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.14.36518.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachines.WPF", "VendingMachines\VendingMachines.WPF.csproj", "{A2FDA8A4-D9F2-494F-9D57-594BCE59CADF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{19EDE06A-CC08-4657-8268-2F086D84EAD2} = {19EDE06A-CC08-4657-8268-2F086D84EAD2}
+		{3B93A5E6-2D2D-405D-873C-E196DC25CCCE} = {3B93A5E6-2D2D-405D-873C-E196DC25CCCE}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachines.Domain", "Domain\VendingMachines.Domain.csproj", "{8FC30623-74F7-43C2-84AB-C8283B01F153}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachines.API", "API\VendingMachines.API.csproj", "{A19B36A1-7B92-4C51-A9CA-2C555CC87F29}"
+	ProjectSection(ProjectDependencies) = postProject
+		{19EDE06A-CC08-4657-8268-2F086D84EAD2} = {19EDE06A-CC08-4657-8268-2F086D84EAD2}
+		{3B93A5E6-2D2D-405D-873C-E196DC25CCCE} = {3B93A5E6-2D2D-405D-873C-E196DC25CCCE}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachines.Application", "VendingMachines.Application\VendingMachines.Application.csproj", "{3B93A5E6-2D2D-405D-873C-E196DC25CCCE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8FC30623-74F7-43C2-84AB-C8283B01F153} = {8FC30623-74F7-43C2-84AB-C8283B01F153}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachines.Infrastructure", "VendingMachines.DAL\VendingMachines.Infrastructure.csproj", "{19EDE06A-CC08-4657-8268-2F086D84EAD2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8FC30623-74F7-43C2-84AB-C8283B01F153} = {8FC30623-74F7-43C2-84AB-C8283B01F153}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{754FC069-D67B-A9D7-50A1-8D1CA196D8F1}"
+	ProjectSection(SolutionItems) = preProject
+		TODO.txt = TODO.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +50,14 @@ Global
 		{A19B36A1-7B92-4C51-A9CA-2C555CC87F29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A19B36A1-7B92-4C51-A9CA-2C555CC87F29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A19B36A1-7B92-4C51-A9CA-2C555CC87F29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B93A5E6-2D2D-405D-873C-E196DC25CCCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B93A5E6-2D2D-405D-873C-E196DC25CCCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B93A5E6-2D2D-405D-873C-E196DC25CCCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B93A5E6-2D2D-405D-873C-E196DC25CCCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19EDE06A-CC08-4657-8268-2F086D84EAD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19EDE06A-CC08-4657-8268-2F086D84EAD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19EDE06A-CC08-4657-8268-2F086D84EAD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19EDE06A-CC08-4657-8268-2F086D84EAD2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
