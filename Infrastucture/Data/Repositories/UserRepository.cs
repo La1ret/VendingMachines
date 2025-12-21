@@ -63,49 +63,5 @@ namespace VendingMachines.Infrastructure.Data.Repositories
                 await _context.SaveChangesAsync();
             }
         }
-
-        public async Task<User> AuthenticateAsync(string username, string providedPassword)
-        {
-            var user = await _context.Users
-                                     .Include(u => u.Role)
-                                     .FirstOrDefaultAsync(u => u.Username == username);
-
-            if (user == null)
-            {
-                return null;
-            }
-
-            bool isPasswordValid = PasswordHasher.VerifyPassword(providedPassword, user.PasswordHash);
-
-            if (isPasswordValid)
-            {
-                return user; 
-            }
-            else
-            {
-                return null; 
-            }
-        }
-
-        /// <summary>
-        /// Метод для создания предопределенных ролей при первом запуске приложения/миграции.
-        /// </summary>
-        public void InitializePredefinedUsers(ModelBuilder modelBuilder)
-        {
-           modelBuilder.Entity<Role>().HasData(
-                   new User { Username = "Admin",
-                               PasswordHash = PasswordHasher.HashPassword("1"),
-                               FullName = "Майская Мирослава Андреевна",
-                               Email = "may@mail.ru",
-                               RoleId = 1},
-
-                    new User { Username = "Manager",
-                               PasswordHash = PasswordHasher.HashPassword("123"),
-                               FullName = "Пахомов Ярослав Константинович",
-                               Email = "Pahomov@yandex.ru",
-                               RoleId = 2}
-                );
-            
-        }
     }
 }

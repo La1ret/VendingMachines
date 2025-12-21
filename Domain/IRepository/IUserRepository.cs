@@ -16,9 +16,5 @@ namespace VendingMachines.Domain.IRepository
         Task AddUserAsync(User user);
         Task UpdateUserAsync(User user);
         Task DeleteUserAsync(int id);
-
-        // Метод для проверки учетных данных
-        Task<User> AuthenticateAsync(string username, string passwordHash);
-        //void InitializePredefinedUsers(ModelBuilder modelBuilder);
     }
 }

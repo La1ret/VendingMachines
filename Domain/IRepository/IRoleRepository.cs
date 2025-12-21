@@ -16,8 +16,5 @@ namespace VendingMachines.Domain.IRepository
         Task AddRoleAsync(Role role);
         Task UpdateRoleAsync(Role role);
         Task DeleteRoleAsync(int id);
-
-        // Метод для инициализации предопределенных ролей
-        //void InitializePredefinedRoles(ModelBuilder modelBuilder);
     }
 }

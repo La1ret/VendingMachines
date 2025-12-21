@@ -47,7 +47,7 @@ namespace VendingMachines.Domain.Models
         public int FailedLoginAttempts { get; set; }
 
         //Для временного запрета ввода пароля
-        public DateTime LockoutEnd { get; set; }
+        public DateTime? LockoutEnd { get; set; }
 
     }
 }

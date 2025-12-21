@@ -55,30 +55,5 @@ namespace VendingMachines.Infrastructure.Data.Repositories
                 await _context.SaveChangesAsync();
             }
         }
-
-        /// <summary>
-        /// Метод для создания предопределенных ролей при первом запуске приложения/миграции.
-        ///// </summary>
-        public void InitializePredefinedRoles(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Role>().HasData(
-                    new Role { SystemName = "Admin",
-                               DisplayName = "Администратор",
-                               Description = "Полный доступ ко всем функциям системы." },
-
-                    new Role { SystemName = "Operator",
-                        DisplayName = "Оператор",
-                        Description = "Доступ к основным рабочим функциям (обработке заказов/данных)." },
-
-                    new Role { SystemName = "User",
-                        DisplayName = "Пользователь",
-                        Description = "Стандартный пользователь системы." },
-
-                    new Role { SystemName = "Guest",
-                        DisplayName = "Гость",
-                        Description = "Минимальные права (просмотр публичной информации)." }
-                );
-            
-        }
     }
 }

@@ -1,7 +1,4 @@
-﻿using VendingMachines.Application.IServices;
-using VendingMachines.Domain.IRepository;
-using VendingMachines.Domain.Models;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +7,12 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using VendingMachines.Application.IServices;
+using VendingMachines.Domain.IRepository;
+using VendingMachines.Domain.Models;
 using VendingMachines.Shared;
+using VendingMachines.Shared.DTOs.User;
+using VendingMachines.Application.Common;
 
 namespace VendingMachines.Application.Services
 {
@@ -38,64 +40,42 @@ namespace VendingMachines.Application.Services
         }
         #endregion
 
-        #region PropertyChanged
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public async Task<OperationResult<UserAuthResponse>> AuthenticateAsync(UserLoginRequest request)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
+            var user = await _userRepository.GetUserByUsernameAsync(request.Username);
+            if (user == null) return OperationResult<UserAuthResponse>.Failure("Пользователь не найден");
 
-        #region Переменные
-
-        private int _failedLoginAttempts = 0;
-        #endregion
-
-        #region Свойство блокировки
-
-        private bool _isLocked = false;
-
-        public bool IsLocked
-        {
-            get => _isLocked;
-            private set { _isLocked = value; OnPropertyChanged(); }
-        }
-        #endregion
-
-        #region Методы блокировки окна
-
-        private async Task LockWindowAsync(int seconds)
-        {
-            IsLocked = true;
-            await Task.Delay(seconds * 1000);
-            IsLocked = false;
-            _failedLoginAttempts = 0;
-        }
-
-        private void IncrementFailedAttempts()
-        {
-            _failedLoginAttempts++;
-
-            if (_failedLoginAttempts >= 3)
+            if (user.LockoutEnd > DateTime.UtcNow)
             {
-                _ = LockWindowAsync(15);
-            }
-        }
-        #endregion 
-
-        public async Task<OperationResult> AuthenticateAsync(string username, string password)
-        {
-            var user = await _userRepository.AuthenticateAsync(username, password);
-            if (user == null)
-            {
-                IncrementFailedAttempts();
-                return OperationResult.Failure("Неверный логин или пароль.");
+                return OperationResult<UserAuthResponse>.Failure($"Аккаунт заблокирован. Попробуйте через {Math.Ceiling((user.LockoutEnd - DateTime.UtcNow).Value.TotalMinutes)} сек.");
             }
 
-            _userSessionService.CurrentUser = user;
-            return OperationResult.Success();
+            bool isPasswordValid = PasswordHasher.VerifyPassword(request.Password, user.PasswordHash);
+
+            if (!isPasswordValid)
+            {
+                user.FailedLoginAttempts++;
+
+                if (user.FailedLoginAttempts >= 3)
+                {
+                    user.LockoutEnd = DateTime.UtcNow.AddSeconds(15); 
+                    user.FailedLoginAttempts = 0;
+                }
+
+                await _userRepository.UpdateUserAsync(user);
+                return OperationResult<UserAuthResponse>.Failure("Неверный пароль");
+            }
+
+            user.FailedLoginAttempts = 0;
+            user.LockoutEnd = null;
+            await _userRepository.UpdateUserAsync(user);
+
+            //Переписать
+            return OperationResult<UserAuthResponse>.Success(new UserAuthResponse  
+            {
+                Token = "FAKE_TOKEN",// ВОТ ЭТО
+                Username = user.FullName
+            }); 
         }
 
         //HERE
@@ -119,8 +99,7 @@ namespace VendingMachines.Application.Services
                 return OperationResult.Failure("Ошибка системы: роль 'Пользователь' не найдена. Обратитесь к администратору.");
             }
 
-            //var passwordHash = PasswordHasher.HashPassword(password); //THIS
-            var passwordHash = "REMOVE";
+            var passwordHash = PasswordHasher.HashPassword(password); //THIS
 
             User user = new User
             {
