@@ -78,6 +78,7 @@ namespace VendingMachines.Infrastructure.Data
             modelBuilder.Entity<User>().HasData(
                 new User
                 {
+                    UserId = 1,
                     Username = "Admin",
                     PasswordHash = PasswordHasher.HashPassword("1"),
                     FullName = "Майская Мирослава Андреевна",
@@ -88,6 +89,7 @@ namespace VendingMachines.Infrastructure.Data
 
                 new User
                 {
+                    UserId = 2,
                     Username = "Manager",
                     PasswordHash = PasswordHasher.HashPassword("123"),
                     FullName = "Пахомов Ярослав Константинович",
