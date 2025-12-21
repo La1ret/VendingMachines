@@ -50,5 +50,10 @@ namespace VendingMachines.WPF.Services
         {
             return OperationResult.Failure("Пока не подключен API");
         }
+
+        public async Task<OperationResult> CreateGuestTokenAsync()
+        {
+            return OperationResult.Failure("Пока не подключен API");
+        }
     }
 }

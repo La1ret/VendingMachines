@@ -15,5 +15,6 @@ namespace VendingMachines.WPF.Services.IServices
         Task<OperationResult> AuthenticateAsync(string username, string password);
         Task<OperationResult> RequestPasswordRecoveryAsync(string username, string email);
         Task<OperationResult> RegisterAsync(string fullName, string email, string username, string password);
+        Task<OperationResult> CreateGuestTokenAsync();
     }
 }

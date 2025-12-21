@@ -9,6 +9,6 @@
         Title="Основа" Height="450" Width="800">
     <Grid>
         <Button Content="←" Style="{StaticResource TransparentButton}" Command="{Binding BackToAuthCommand}" Background="PaleTurquoise"/>
-        <TextBlock Text="{Binding UserList}"/>
+        <!--<TextBlock Text="{Binding UserList}"/>-->
     </Grid>
 </Window>

@@ -42,7 +42,7 @@ namespace VendingMachines
         private void ConfigureServices(IServiceCollection services)
         {
             //Service (для навигации между окнами и страницами и вызова АПИ поэтому не в Application)
-            services.AddTransient<INavigationService, NavigationService>();
+            services.AddSingleton<INavigationService, NavigationService>();
             services.AddTransient<IApiAuthService, ApiAuthService>();
 
             //Views

@@ -234,9 +234,17 @@ namespace VendingMachines.ViewModels
 
         #region Команда входа без аутентификации
 
-        private void OnEnterLikeGuestCommandExecute(object p)
+        private async void OnEnterLikeGuestCommandExecute(object p)
         {
-           
+            var result = await _authService.CreateGuestTokenAsync();
+            if (result.IsSuccess)
+            {
+                _navigationService.ChangeWindowTo<MainWindow>();
+            }
+            else
+            {
+                AuthStatusMessage = result.Message;
+            }
         }
         #endregion
     }

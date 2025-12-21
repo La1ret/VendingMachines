@@ -23,13 +23,16 @@ namespace VendingMachines.WPF.Services
         }
         #endregion
 
-        public void SetFrame(Frame frame) => _frame = frame;
+        public void SetFrame(Frame frame)
+        {
+            _frame = frame;
+        }
 
         public void NavigateToPage<NextPage>() 
             where NextPage : Page
         {
             var page = _serviceProvider.GetRequiredService<NextPage>();
-            _frame?.Navigate(page);
+            _frame.Navigate(page);
         }
 
         public void CloseWindow(Window windowToClose)
