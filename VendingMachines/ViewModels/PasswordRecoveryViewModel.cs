@@ -1,5 +1,6 @@
-﻿using VendingMachines.Common;
-using VendingMachines.Services.Interfaces;
+﻿using VendingMachines.WPF.Common.Base;
+using VendingMachines.WPF.Services.IServices;
+using VendingMachines.WPF.Services;
 using VendingMachines.Views.Pages;
 using System;
 using System.Collections.Generic;
@@ -10,13 +11,12 @@ using System.Windows.Input;
 
 namespace VendingMachines.ViewModels
 {
-    public class PasswordRecoveryViewModel : ViewModelBase
+    internal class PasswordRecoveryViewModel : ViewModelBase
     {
         #region Объявление сервисов
 
         private readonly INavigationService _navigationService;
-        private readonly IAuthentificationService _authService;
-        private readonly IUserService _userService;
+        private readonly IApiAuthService _authService;
         #endregion
 
         #region Объявление команд
@@ -35,7 +35,7 @@ namespace VendingMachines.ViewModels
 
         #region Инициализация
 
-        public PasswordRecoveryViewModel(INavigationService navigationService, IAuthentificationService authService/*, IUserService userService, */)
+        public PasswordRecoveryViewModel(INavigationService navigationService, IApiAuthService authService/*, IUserService userService, */)
         {
             _navigationService = navigationService;
             _authService = authService;

@@ -7,20 +7,20 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using VendingMachines.Common;
-using VendingMachines.Services.Interfaces;
+using VendingMachines.WPF.Common.Base;
 using VendingMachines.Views.Pages;
+using VendingMachines.WPF.Services.IServices;
 using VendingMachines.Views.Windows;
+using VendingMachines.WPF.Services;
 
 namespace VendingMachines.ViewModels
 {
-    public class PegistrationViewModel : ViewModelBase
+    internal class PegistrationViewModel : ViewModelBase
     {
         #region Объявление сервисов
 
         private readonly INavigationService _navigationService;
-        private readonly IUserService _userService;
-        private readonly IAuthentificationService _authService;
+        private readonly IApiAuthService _authService;
         #endregion
 
         #region Объявление команд
@@ -49,10 +49,9 @@ namespace VendingMachines.ViewModels
 
         #region Инициализация
 
-        public PegistrationViewModel(INavigationService navigationService, IUserService userService, IAuthentificationService authService)
+        public PegistrationViewModel(INavigationService navigationService, IApiAuthService authService)
         {
             _navigationService = navigationService;
-            _userService = userService;
             _authService = authService;
 
             BackCommand = new RelayCommand(OnBackCommandExecute);

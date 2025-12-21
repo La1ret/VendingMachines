@@ -1,11 +1,11 @@
-﻿using VendingMachines.Application.IServices;
+﻿using VendingMachines.WPF.Services.IServices;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace VendingMachines.Services
+namespace VendingMachines.WPF.Services
 {
     internal class NavigationService : INavigationService
     {
@@ -43,7 +43,7 @@ namespace VendingMachines.Services
         public void ChangeWindowTo<NextWindow>()
              where NextWindow : Window
         {
-            var currentWindow = Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w.IsActive);
+            var currentWindow = System.Windows.Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w.IsActive);
 
             var newWindow = _serviceProvider.GetRequiredService<NextWindow>();
                 

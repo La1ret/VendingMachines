@@ -1,5 +1,4 @@
-﻿using VendingMachines.Helpers;
-using VendingMachines.Services.Interfaces;
+﻿using VendingMachines.WPF.Common.Base.Helpers;
 using VendingMachines.ViewModels;
 using VendingMachines.Views.Pages;
 using System;
@@ -16,15 +15,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using VendingMachines.WPF.Services.IServices;
+using VendingMachines.WPF.Services;
 
 namespace VendingMachines.Views.Windows
 {
     /// <summary>
     /// Логика взаимодействия для Authorization.xaml, подключение AuthorizationViewModel.cs
     /// </summary>
-    public partial class Authorization : Window
+    internal partial class Authorization : Window
     {
-        public Authorization(AuthorizationViewModel viewModel, INavigationService navigationService)
+        internal Authorization(AuthorizationViewModel viewModel, INavigationService navigationService)
         {
             InitializeComponent();
              

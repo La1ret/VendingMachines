@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,6 +12,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VendingMachines.Application.IServices;
+using VendingMachines.Domain.IRepository;
+using VendingMachines.Application.Services;
+using VendingMachines.Infrastructure.Data.Repositories;
+using VendingMachines.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace VendingMachines.API
 {
@@ -26,6 +33,16 @@ namespace VendingMachines.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<VendingMachinesDbContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IRoleRepository, RoleRepository>();
+
+            services.AddTransient<IAuthService, AuthService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddScoped<IUserSessionService, UserSessionService>();
+
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", builder =>

@@ -1,5 +1,4 @@
-﻿using VendingMachines.Common;
-using VendingMachines.Services.Interfaces;
+﻿using VendingMachines.WPF.Common.Base;
 using VendingMachines.Views.Pages;
 using System;
 using System.Collections.Generic;
@@ -10,11 +9,12 @@ using System.Windows.Input;
 
 namespace VendingMachines.ViewModels
 {
-    public class AuthorizationViewModel
+    internal class AuthorizationViewModel
     {
+        //ЗДЕСЬ ВООБЩЕ ПУСТО ДОЛЖНО БЫТЬ НО НА ВСЯКИЙ
         #region Подключение сервисов
         
-        private readonly INavigationService _navigationService;
+       // private readonly INavigationService _navigationService;
         #endregion
 
         #region Определение команд
@@ -26,9 +26,9 @@ namespace VendingMachines.ViewModels
 
         #region Инициализация
 
-        public AuthorizationViewModel(INavigationService navigationService)
+        public AuthorizationViewModel(/*INavigationService navigationService*/)
         {
-            _navigationService = navigationService;
+            //_navigationService = navigationService;
         }
         #endregion
 
@@ -36,7 +36,7 @@ namespace VendingMachines.ViewModels
 
         private void ResizeFrameForCurrentPage(object p)
         {
-            _navigationService.NavigateToPage<PasswordRecovery>();
+            //_navigationService.NavigateToPage<PasswordRecovery>();
         }
         #endregion
     }

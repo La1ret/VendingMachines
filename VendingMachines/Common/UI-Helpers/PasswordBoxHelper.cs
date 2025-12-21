@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace VendingMachines.Helpers
+namespace VendingMachines.WPF.Common.Base.Helpers
 {
     internal static class PasswordBoxHelper
     {

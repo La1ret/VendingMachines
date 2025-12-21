@@ -21,7 +21,7 @@ namespace VendingMachines.Views.Pages
     /// </summary>
     public partial class PasswordRecovery : Page
     {
-        public PasswordRecovery(PasswordRecoveryViewModel viewModel)
+        internal PasswordRecovery(PasswordRecoveryViewModel viewModel)
         {
             InitializeComponent();
 

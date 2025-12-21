@@ -21,7 +21,7 @@ namespace VendingMachines.Views.Pages
     /// </summary>
     public partial class Registration : Page
     {
-        public Registration(PegistrationViewModel viewModel)
+        internal Registration(PegistrationViewModel viewModel)
         {
             InitializeComponent();
 

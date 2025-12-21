@@ -1,26 +1,22 @@
-﻿using VendingMachines.Data;
-using VendingMachines.Data.Interfaces;
-using VendingMachines.Data.Repositories;
-using VendingMachines.Services;
-using VendingMachines.Services.Interfaces;
-using VendingMachines.ViewModels;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
+using VendingMachines.ViewModels;
+using VendingMachines.WPF.Services;
+using VendingMachines.WPF.Services.IServices;
 
 namespace VendingMachines
 {
     /// <summary>
     /// Логика взаимодействия для App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App : System.Windows.Application
     {
 
         private readonly ServiceProvider serviceProvider;
@@ -45,16 +41,9 @@ namespace VendingMachines
 
         private void ConfigureServices(IServiceCollection services)
         {
-            // Регистрация контекста БД как Transient с использованием фабрики создания
-            services.AddTransient<VendingMachinesDbContext>(_ => new VendingMachinesDbContext());
-
-            services.AddTransient<IUserRepository, UserRepository>();
-            services.AddTransient<IRoleRepository, RoleRepository>();
-
-            services.AddTransient<IAuthentificationService, AuthService>();
-            services.AddTransient<IUserService, UserService>();
-            services.AddSingleton<INavigationService, NavigationService>();
-            services.AddSingleton<IUserSessionService, UserSessionService>();
+            //Service (для навигации между окнами и страницами и вызова АПИ поэтому не в Application)
+            services.AddTransient<INavigationService, NavigationService>();
+            services.AddTransient<IApiAuthService, ApiAuthService>();
 
             //Views
             services.AddTransient<Views.Windows.Authorization>();

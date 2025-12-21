@@ -1,9 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace VendingMachines.Application.IServices
+namespace VendingMachines.WPF.Services.IServices
 {
-    public interface INavigationService
+    internal interface INavigationService
     {
         void SetFrame(Frame frame);
         void CloseWindow(Window windowToClose);
@@ -11,6 +11,5 @@ namespace VendingMachines.Application.IServices
             where T : Page;
         void ChangeWindowTo<T>()
             where T : Window;
-
     }
 }

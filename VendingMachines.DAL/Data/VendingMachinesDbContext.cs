@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using VendingMachines.Domain;
 using VendingMachines.Domain.Models;
 using VendingMachines.Infrastructure.Authentication;
-using VendingMachines.Infrastructure.Repositories;
+using VendingMachines.Infrastructure.Data.Repositories;
 
 namespace VendingMachines.Infrastructure.Data
 {

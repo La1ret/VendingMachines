@@ -18,8 +18,6 @@ namespace VendingMachines.Application.Services
     {
         #region Объявление сервисов и контекста
 
-        private readonly INavigationService _navigationService;
-
         private readonly IUserRepository _userRepository;
 
         private readonly IUserSessionService _userSessionService;
@@ -31,12 +29,10 @@ namespace VendingMachines.Application.Services
         #region Инициализатор
 
         public AuthService( IUserRepository userRepository, //THIS
-                                        INavigationService navigationService, //THIS
                                         IUserSessionService userSessionService,
                                         IRoleRepository roleRepository)
         {
             _userRepository = userRepository;
-            _navigationService = navigationService;
             _userSessionService = userSessionService;
             _roleRepository = roleRepository;
         }

@@ -9,7 +9,7 @@ using VendingMachines.Domain.Models;
 using VendingMachines.Infrastructure.Authentication;
 using VendingMachines.Infrastructure.Data;
 
-namespace VendingMachines.Infrastructure.Repositories
+namespace VendingMachines.Infrastructure.Data.Repositories
 {
     public class UserRepository : IUserRepository
     {

@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:h="clr-namespace:VendingMachines.Helpers">
+                    xmlns:h="clr-namespace:VendingMachines.WPF.Common.Base.Helpers">
     
     <ControlTemplate x:Key="TransparentDisebledButtonCT" TargetType="{x:Type Button}">
         <Border x:Name="border"

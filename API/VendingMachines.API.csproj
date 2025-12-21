@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\VendingMachines.Domain.csproj" />
+    <ProjectReference Include="..\VendingMachines.Application\VendingMachines.Application.csproj" />
+    <ProjectReference Include="..\VendingMachines.DAL\VendingMachines.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 using System.Web;
 
-namespace VendingMachines.Common
+namespace VendingMachines.WPF.Common.Base
 {
-    public abstract class ViewModelBase : INotifyPropertyChanged
+    internal abstract class ViewModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

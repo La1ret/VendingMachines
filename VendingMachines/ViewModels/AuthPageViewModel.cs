@@ -7,22 +7,21 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using VendingMachines.Common;
-using VendingMachines.Models;
-using VendingMachines.Services;
-using VendingMachines.Services.Interfaces;
+using VendingMachines.WPF.Common.Base;
+using VendingMachines.WPF.Services;
+using VendingMachines.WPF.Services.IServices;
 using VendingMachines.Views.Pages;
 using VendingMachines.Views.Windows;
 
 namespace VendingMachines.ViewModels
 {
-    public class AuthPageViewModel : ViewModelBase
+    internal class AuthPageViewModel : ViewModelBase
     {
         #region Объявление сервисов
 
         private readonly INavigationService _navigationService;
 
-        private readonly IAuthentificationService _authService;
+        private readonly IApiAuthService _authService;
         #endregion
 
         #region Объявление команд
@@ -52,7 +51,7 @@ namespace VendingMachines.ViewModels
 
         #region Инициализация
 
-        public AuthPageViewModel(INavigationService navigationService, IAuthentificationService authService /*, ...*/)
+        public AuthPageViewModel(INavigationService navigationService, IApiAuthService authService /*, ...*/)
         {
             _navigationService = navigationService;
             _authService = authService;
@@ -61,7 +60,7 @@ namespace VendingMachines.ViewModels
 
             //Подписка на изменение блокировки окна авторизации
             _authService.PropertyChanged += (s, e) => {
-                if (e.PropertyName == nameof(IAuthentificationService.IsLocked))
+                if (e.PropertyName == nameof(IApiAuthService.IsLocked))
                 {
                     AuthStatusMessage = "Превышено количество попыток входа! Система заблокирована на 15 секунд.";
                     WindowIsEnabled = !_authService.IsLocked;
@@ -237,7 +236,7 @@ namespace VendingMachines.ViewModels
 
         private void OnEnterLikeGuestCommandExecute(object p)
         {
-            VendingMachines.Services.Class1.Button_Click();
+           
         }
         #endregion
     }
