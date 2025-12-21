@@ -35,15 +35,16 @@ namespace VendingMachines.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            InitializePredefinedRoles(modelBuilder);
-            InitializePredefinedUsers(modelBuilder);
-        }
+            const int adminRoleId = 1;
+            const int operatorRoleId = 2;
+            const int userRoleId = 3;
+            const int guestRoleId = 4;
 
-        public void InitializePredefinedRoles(ModelBuilder modelBuilder)
-        {
+
             modelBuilder.Entity<Role>().HasData(
                 new Role
                 {
+                    RoleId = adminRoleId,
                     SystemName = "Admin",
                     DisplayName = "Администратор",
                     Description = "Полный доступ ко всем функциям системы."
@@ -51,6 +52,7 @@ namespace VendingMachines.Infrastructure.Data
 
                 new Role
                 {
+                    RoleId = operatorRoleId,
                     SystemName = "Operator",
                     DisplayName = "Оператор",
                     Description = "Доступ к основным рабочим функциям (обработке заказов/данных)."
@@ -58,6 +60,7 @@ namespace VendingMachines.Infrastructure.Data
 
                 new Role
                 {
+                    RoleId = userRoleId,
                     SystemName = "User",
                     DisplayName = "Пользователь",
                     Description = "Стандартный пользователь системы."
@@ -65,23 +68,22 @@ namespace VendingMachines.Infrastructure.Data
 
                 new Role
                 {
+                    RoleId = guestRoleId,
                     SystemName = "Guest",
                     DisplayName = "Гость",
                     Description = "Минимальные права (просмотр публичной информации)."
                 }
             );
 
-        }
-        public void InitializePredefinedUsers(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Role>().HasData(
+            modelBuilder.Entity<User>().HasData(
                 new User
                 {
                     Username = "Admin",
                     PasswordHash = PasswordHasher.HashPassword("1"),
                     FullName = "Майская Мирослава Андреевна",
                     Email = "may@mail.ru",
-                    RoleId = 1
+                    RoleId = adminRoleId,
+                    FailedLoginAttempts = 0
                 },
 
                 new User
@@ -90,7 +92,8 @@ namespace VendingMachines.Infrastructure.Data
                     PasswordHash = PasswordHasher.HashPassword("123"),
                     FullName = "Пахомов Ярослав Константинович",
                     Email = "Pahomov@yandex.ru",
-                    RoleId = 2
+                    RoleId = operatorRoleId,
+                    FailedLoginAttempts = 0
                 }
             );
         }

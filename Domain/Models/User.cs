@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -39,5 +40,14 @@ namespace VendingMachines.Domain.Models
         // Навигационное свойство
         [ForeignKey("RoleId")]
         public virtual Role Role { get; set; }
+
+        //Для блока от взлома
+        [Required]
+        [DefaultValue(0)]
+        public int FailedLoginAttempts { get; set; }
+
+        //Для временного запрета ввода пароля
+        public DateTime LockoutEnd { get; set; }
+
     }
 }
