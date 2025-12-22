@@ -55,7 +55,7 @@ namespace VendingMachines.Application.Services
 
             if (user.LockoutEnd > DateTime.UtcNow)
             {
-                return OperationResult<UserAuthResponse>.Failure($"Аккаунт заблокирован. Попробуйте через {Math.Ceiling((user.LockoutEnd - DateTime.UtcNow).Value.TotalMinutes)} сек.");
+                return OperationResult<UserAuthResponse>.Failure($"Вход в аккаунт временно заблокирован. Попробуйте через {Math.Ceiling((user.LockoutEnd - DateTime.UtcNow).Value.TotalSeconds)} сек.");
             }
 
             bool isPasswordValid = _passwordHasher.VerifyPassword(request.Password, user.PasswordHash);
