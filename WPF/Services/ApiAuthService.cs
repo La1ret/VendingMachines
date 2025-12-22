@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 using VendingMachines.Shared;
 using VendingMachines.Shared.DTOs.User;
 using VendingMachines.WPF.Services.IServices;
+using System.Net.Http.Json;
 
 namespace VendingMachines.WPF.Services
 {
     public class ApiAuthService : IApiAuthService
     {
-        private bool _isLocked;
         private readonly HttpClient _httpClient;
       
         public ApiAuthService(HttpClient httpClient) 
@@ -32,12 +32,24 @@ namespace VendingMachines.WPF.Services
         }
         #endregion
 
-        #region Свойство блокировки
+        #region Поля
+
+        private bool _isLocked;
+        private string _messageIsLocked;
+        #endregion
+
+        #region Свойства блокировки
 
         public bool IsLocked
         {
             get => _isLocked;
             private set { _isLocked = value; OnPropertyChanged(); }
+        }
+
+        public string MessageIsLocked
+        {
+            get => _messageIsLocked;
+            private set { _messageIsLocked = value; OnPropertyChanged(); }
         }
         #endregion
 
@@ -54,10 +66,25 @@ namespace VendingMachines.WPF.Services
 
         public async Task<OperationResult<UserAuthResponse>> AuthenticateAsync(UserLoginRequest request)
         {
-            var response = await _httpClient.PostAsJsonAsync("https://localhost:5001/api/Auth/Authenticate", request);
-            var a = 0;
-            //response.Content.ReadFromJsonAsync<OperationResult<UserAuthResponse>>();
-            return OperationResult<UserAuthResponse>.Failure("Пока не обрабатывается ответ API");
+            var response = await _httpClient.PostAsJsonAsync("https://localhost:5001/api/Auth/Login", request);
+
+            var result = await response.Content.ReadFromJsonAsync<OperationResult<UserAuthResponse>>();
+
+            if (result.Message.Contains("Вход в аккаунт временно заблокирован."))
+            {
+                var messageArray = result.Message.Split();
+
+                if (short.TryParse(messageArray[messageArray.Length - 2], out short timeInSeconds))
+                {
+                    IsLocked = true;
+                    MessageIsLocked = result.Message;
+                    await Task.Delay(timeInSeconds * 1000);
+                    result.Message = "";//Потому что уже отображено
+                    IsLocked = false;
+                }
+            }
+            
+            return result;
         }
 
         public async Task<OperationResult> RequestPasswordRecoveryAsync(string username, string email)

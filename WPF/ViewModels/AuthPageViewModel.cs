@@ -63,7 +63,7 @@ namespace VendingMachines.ViewModels
             _authService.PropertyChanged += (s, e) => {
                 if (e.PropertyName == nameof(IApiAuthService.IsLocked))
                 {
-                    AuthStatusMessage = "Превышено количество попыток входа! Система заблокирована на 15 секунд.";
+                    AuthStatusMessage = _authService.MessageIsLocked;
                     WindowIsEnabled = !_authService.IsLocked;
                 }
             };
@@ -208,8 +208,8 @@ namespace VendingMachines.ViewModels
                 AuthStatusMessage = result.Message;
             }
             
-            //Затирание текста через 15 сек
-            await Task.Delay(15000);//15 сек
+            //Затирание текста через 20 сек
+            await Task.Delay(20 * 1000);
             AuthStatusMessage = "";
         }
 
