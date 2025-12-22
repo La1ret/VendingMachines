@@ -52,10 +52,11 @@ namespace VendingMachines.WPF.Services
             return OperationResult.Failure("Пока не подключен API");
         }
 
-        public async Task<OperationResult<UserAuthResponse>> AuthenticateAsync(UserSignInRequest request)
+        public async Task<OperationResult<UserAuthResponse>> AuthenticateAsync(UserLoginRequest request)
         {
             var response = await _httpClient.PostAsJsonAsync("https://localhost:5001/api/Auth/Authenticate", request);
-             //response.Content.ReadFromJsonAsync<OperationResult<UserAuthResponse>>();
+            var a = 0;
+            //response.Content.ReadFromJsonAsync<OperationResult<UserAuthResponse>>();
             return OperationResult<UserAuthResponse>.Failure("Пока не обрабатывается ответ API");
         }
 

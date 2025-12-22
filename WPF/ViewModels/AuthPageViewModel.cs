@@ -196,7 +196,7 @@ namespace VendingMachines.ViewModels
             AuthStatusMessage = "";
             await Task.Delay(150); //Для того чтоб пользователь видел что сообщение сменилось (если на такое же)
             
-            var signInRequest = new UserSignInRequest { Username = _username, Password = _password };
+            var signInRequest = new UserLoginRequest { Username = _username, Password = _password };
 
             var result = await _authService.AuthenticateAsync(signInRequest);
             if (result.IsSuccess)

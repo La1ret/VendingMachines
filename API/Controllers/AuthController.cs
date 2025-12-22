@@ -13,10 +13,10 @@ namespace VendingMachines.API.Controllers
         private readonly IAuthService _authService;
         public AuthController(IAuthService authService) => _authService = authService;
 
-        [HttpPost("Authenticate")]
-        public async Task<IActionResult> authenticate([FromBody] UserSignInRequest request)
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login([FromBody] UserLoginRequest request)
         {
-            var result = await _authService.AuthenticateAsync(request);
+            var result = await _authService.LoginAsync(request);
             if (!result.IsSuccess) return BadRequest(result);
 
             return Ok(result);

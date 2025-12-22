@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -9,11 +10,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using VendingMachines.Application.Common;
 using VendingMachines.Application.IServices;
 using VendingMachines.Application.Services;
 using VendingMachines.Domain.IRepository;
@@ -39,10 +43,14 @@ namespace VendingMachines.API
         {
             services.AddDbContext<VendingMachinesDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            
+            services.Configure<JwtOptions>(Configuration.GetSection("JwtOptions"));
 
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IRoleRepository, RoleRepository>();
+
             services.AddTransient<IPasswordHasher, PasswordHasher>();
+            services.AddTransient<IJwtTokenGenerator, JwtTokenGenerator>();
 
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IUserService, UserService>();
@@ -76,6 +84,36 @@ namespace VendingMachines.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
             });
+
+            var jwtOptions = Configuration.GetSection("JwtOptions").Get<JwtOptions>();
+            var key = Encoding.ASCII.GetBytes(jwtOptions.SecretKey);
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.RequireHttpsMetadata = false;
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+
+                    ValidateIssuer = true,
+                    ValidIssuer = jwtOptions.Issuer,
+
+                    ValidateAudience = true, 
+                    ValidAudience = jwtOptions.Audience,
+
+                    ValidateLifetime = true, 
+                    ClockSkew = TimeSpan.Zero 
+                };
+            });
+
+            services.AddAuthorization();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -93,6 +131,8 @@ namespace VendingMachines.API
             app.UseRouting();
 
             app.UseCors("AllowAll");
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

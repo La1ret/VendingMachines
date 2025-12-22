@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,24 +8,26 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using VendingMachines.Application.Common;
 using VendingMachines.Application.IServices;
 using VendingMachines.Domain.IRepository;
 using VendingMachines.Domain.Models;
+using VendingMachines.Domain.Security;
 using VendingMachines.Shared;
 using VendingMachines.Shared.DTOs.User;
-using VendingMachines.Application.Common;
-using VendingMachines.Domain.Security;
 
 namespace VendingMachines.Application.Services
 {
     public class AuthService : IAuthService
     {
-        #region Объявление сервисов и контекста
+        #region Объявление сервисов
 
         private readonly IUserRepository _userRepository;
         private readonly IRoleRepository _roleRepository;
         private readonly IPasswordHasher _passwordHasher;
+        private readonly IJwtTokenGenerator _jwtTokenGenerator;
         private readonly IUserSessionService _userSessionService;
+        private readonly JwtOptions _options;
         #endregion
 
         #region Инициализатор
@@ -32,17 +35,20 @@ namespace VendingMachines.Application.Services
         public AuthService(IUserRepository userRepository,
                            IRoleRepository roleRepository, 
                            IPasswordHasher passwordHasher,
-                           IUserSessionService userSessionService)
+                           IUserSessionService userSessionService,
+                           IJwtTokenGenerator jwtTokenGenerator,
+                           IOptions<JwtOptions> jwtOptions)
         {
             _userRepository = userRepository;
             _userSessionService = userSessionService;
             _roleRepository = roleRepository;
             _passwordHasher = passwordHasher;
+            _jwtTokenGenerator = jwtTokenGenerator;
+            _options = jwtOptions.Value;
         }
         #endregion
 
-        //HERE
-        public async Task<OperationResult<UserAuthResponse>> AuthenticateAsync(UserSignInRequest request)
+        public async Task<OperationResult<UserAuthResponse>> LoginAsync(UserLoginRequest request)
         {
             var user = await _userRepository.GetUserByUsernameAsync(request.Username);
             if (user == null) return OperationResult<UserAuthResponse>.Failure("Пользователь не найден");
@@ -74,11 +80,14 @@ namespace VendingMachines.Application.Services
             user.FailedLoginAttempts = 0;
             user.LockoutEnd = null;
             await _userRepository.UpdateUserAsync(user);
+
+            var expiryDate = DateTime.UtcNow.AddMinutes(_options.TokenLifetimeInMinutes);
+            var token = _jwtTokenGenerator.GenerateToken(user, role.SystemName, expiryDate);
             
-            //Переписать
             return OperationResult<UserAuthResponse>.Success(new UserAuthResponse
             {
-                Token = "FAKE_TOKEN",// ВОТ ЭТО
+                Token = token,
+                ExpiryDate = expiryDate,
                 FullName = user.FullName,
                 RoleSystemName = role.SystemName
             });

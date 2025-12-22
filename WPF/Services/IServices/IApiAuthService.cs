@@ -13,7 +13,7 @@ namespace VendingMachines.WPF.Services.IServices
     public interface IApiAuthService : INotifyPropertyChanged
     {
         bool IsLocked { get; }
-        Task<OperationResult<UserAuthResponse>> AuthenticateAsync(UserSignInRequest request);
+        Task<OperationResult<UserAuthResponse>> AuthenticateAsync(UserLoginRequest request);
         Task<OperationResult> RequestPasswordRecoveryAsync(string username, string email);
         Task<OperationResult> RegisterAsync(string fullName, string email, string username, string password);
         Task<OperationResult> CreateGuestTokenAsync();

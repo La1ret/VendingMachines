@@ -7,7 +7,7 @@ namespace VendingMachines.Application.IServices
 {
     public interface IAuthService
     {
-        Task<OperationResult<UserAuthResponse>> AuthenticateAsync(UserSignInRequest request);
+        Task<OperationResult<UserAuthResponse>> LoginAsync(UserLoginRequest request);
         Task<OperationResult> RegisterAsync(string fullName, string email, string username, string password);
         Task<OperationResult> RequestPasswordRecoveryAsync(string username, string email);
     }
