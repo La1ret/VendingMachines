@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
 using VendingMachines.ViewModels;
@@ -16,7 +17,7 @@ namespace VendingMachines
     /// <summary>
     /// Логика взаимодействия для App.xaml
     /// </summary>
-    public partial class App : System.Windows.Application
+    public partial class App : Application
     {
 
         private readonly ServiceProvider serviceProvider;
@@ -41,8 +42,10 @@ namespace VendingMachines
 
         private void ConfigureServices(IServiceCollection services)
         {
-            //Service (для навигации между окнами и страницами и вызова АПИ поэтому не в Application)
+            //Service
             services.AddSingleton<INavigationService, NavigationService>();
+
+            services.AddSingleton<HttpClient>(new HttpClient());
             services.AddTransient<IApiAuthService, ApiAuthService>();
 
             //Views

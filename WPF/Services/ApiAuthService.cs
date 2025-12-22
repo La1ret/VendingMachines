@@ -54,7 +54,7 @@ namespace VendingMachines.WPF.Services
 
         public async Task<OperationResult<UserAuthResponse>> AuthenticateAsync(UserSignInRequest request)
         {
-            var response = await _httpClient.PostAsJsonAsync("api​/Auth​/Authenticate", request);
+            var response = await _httpClient.PostAsJsonAsync("https://localhost:5001/api/Auth/Authenticate", request);
              //response.Content.ReadFromJsonAsync<OperationResult<UserAuthResponse>>();
             return OperationResult<UserAuthResponse>.Failure("Пока не обрабатывается ответ API");
         }
