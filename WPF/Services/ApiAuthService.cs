@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using VendingMachines.Shared;
+using VendingMachines.Shared.DTOs.User;
 using VendingMachines.WPF.Services.IServices;
 
 namespace VendingMachines.WPF.Services
@@ -14,8 +15,12 @@ namespace VendingMachines.WPF.Services
     public class ApiAuthService : IApiAuthService
     {
         private bool _isLocked;
-
-        public ApiAuthService() { }
+        private readonly HttpClient _httpClient;
+      
+        public ApiAuthService(HttpClient httpClient) 
+        {
+            _httpClient = httpClient;
+        }
 
         #region PropertyChanged
 
@@ -36,15 +41,6 @@ namespace VendingMachines.WPF.Services
         }
         #endregion
 
-        public async Task<OperationResult> RequestPasswordRecoveryAsync(string username, string email)
-        {
-            return OperationResult.Failure("Пока не подключен API");
-        }
-
-        public async Task<OperationResult> AuthenticateAsync(string username, string password)
-        {
-            return OperationResult.Failure("Пока не подключен API");
-        }
 
         public async Task<OperationResult> RegisterAsync( string fullName, string email, string username, string password) 
         {
@@ -52,6 +48,18 @@ namespace VendingMachines.WPF.Services
         }
 
         public async Task<OperationResult> CreateGuestTokenAsync()
+        {
+            return OperationResult.Failure("Пока не подключен API");
+        }
+
+        public async Task<OperationResult<UserAuthResponse>> AuthenticateAsync(UserSignInRequest request)
+        {
+            var response = await _httpClient.PostAsJsonAsync("api​/Auth​/Authenticate", request);
+             //response.Content.ReadFromJsonAsync<OperationResult<UserAuthResponse>>();
+            return OperationResult<UserAuthResponse>.Failure("Пока не обрабатывается ответ API");
+        }
+
+        public async Task<OperationResult> RequestPasswordRecoveryAsync(string username, string email)
         {
             return OperationResult.Failure("Пока не подключен API");
         }

@@ -13,6 +13,7 @@ using VendingMachines.Domain.Models;
 using VendingMachines.Shared;
 using VendingMachines.Shared.DTOs.User;
 using VendingMachines.Application.Common;
+using VendingMachines.Domain.Security;
 
 namespace VendingMachines.Application.Services
 {
@@ -21,26 +22,27 @@ namespace VendingMachines.Application.Services
         #region Объявление сервисов и контекста
 
         private readonly IUserRepository _userRepository;
-
-        private readonly IUserSessionService _userSessionService;
-
         private readonly IRoleRepository _roleRepository;
+        private readonly IPasswordHasher _passwordHasher;
+        private readonly IUserSessionService _userSessionService;
         #endregion
 
-        // HERE
         #region Инициализатор
 
-        public AuthService( IUserRepository userRepository, //THIS
-                                        IUserSessionService userSessionService,
-                                        IRoleRepository roleRepository)
+        public AuthService(IUserRepository userRepository,
+                           IRoleRepository roleRepository, 
+                           IPasswordHasher passwordHasher,
+                           IUserSessionService userSessionService)
         {
             _userRepository = userRepository;
             _userSessionService = userSessionService;
             _roleRepository = roleRepository;
+            _passwordHasher = passwordHasher;
         }
         #endregion
 
-        public async Task<OperationResult<UserAuthResponse>> AuthenticateAsync(UserLoginRequest request)
+        //HERE
+        public async Task<OperationResult<UserAuthResponse>> AuthenticateAsync(UserSignInRequest request)
         {
             var user = await _userRepository.GetUserByUsernameAsync(request.Username);
             if (user == null) return OperationResult<UserAuthResponse>.Failure("Пользователь не найден");
@@ -50,7 +52,7 @@ namespace VendingMachines.Application.Services
                 return OperationResult<UserAuthResponse>.Failure($"Аккаунт заблокирован. Попробуйте через {Math.Ceiling((user.LockoutEnd - DateTime.UtcNow).Value.TotalMinutes)} сек.");
             }
 
-            bool isPasswordValid = PasswordHasher.VerifyPassword(request.Password, user.PasswordHash);
+            bool isPasswordValid = _passwordHasher.VerifyPassword(request.Password, user.PasswordHash);
 
             if (!isPasswordValid)
             {
@@ -58,7 +60,7 @@ namespace VendingMachines.Application.Services
 
                 if (user.FailedLoginAttempts >= 3)
                 {
-                    user.LockoutEnd = DateTime.UtcNow.AddSeconds(15); 
+                    user.LockoutEnd = DateTime.UtcNow.AddSeconds(15);
                     user.FailedLoginAttempts = 0;
                 }
 
@@ -66,16 +68,20 @@ namespace VendingMachines.Application.Services
                 return OperationResult<UserAuthResponse>.Failure("Неверный пароль");
             }
 
+            var role = await _roleRepository.GetRoleByIdAsync(user.RoleId);
+            if (role == null) return OperationResult<UserAuthResponse>.Failure("Ошибка сервера: права доступа пользователя не найдены");
+
             user.FailedLoginAttempts = 0;
             user.LockoutEnd = null;
             await _userRepository.UpdateUserAsync(user);
-
+            
             //Переписать
-            return OperationResult<UserAuthResponse>.Success(new UserAuthResponse  
+            return OperationResult<UserAuthResponse>.Success(new UserAuthResponse
             {
                 Token = "FAKE_TOKEN",// ВОТ ЭТО
-                Username = user.FullName
-            }); 
+                FullName = user.FullName,
+                RoleSystemName = role.SystemName
+            });
         }
 
         //HERE
@@ -99,7 +105,7 @@ namespace VendingMachines.Application.Services
                 return OperationResult.Failure("Ошибка системы: роль 'Пользователь' не найдена. Обратитесь к администратору.");
             }
 
-            var passwordHash = PasswordHasher.HashPassword(password); //THIS
+            var passwordHash = _passwordHasher.HashPassword(password); //THIS
 
             User user = new User
             {
@@ -116,16 +122,16 @@ namespace VendingMachines.Application.Services
             return OperationResult.Success();
         }
 
-        public async Task<OperationResult> RequestPasswordRecoveryAsync(string username, string email) 
+        public async Task<OperationResult> RequestPasswordRecoveryAsync(string username, string email)
         {
             var user = await _userRepository.GetUserByUsernameAsync(username);
-            
+
             if (user == null)
-            { 
+            {
                 return OperationResult.Failure("Данный пользователь не зарегистрирован в системе.");
             }
 
-            if (user.Email != email) 
+            if (user.Email != email)
             {
                 return OperationResult.Failure("Данный пользователь зарегистрирован на другую почту.");
             }

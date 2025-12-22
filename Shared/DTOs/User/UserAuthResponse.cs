@@ -9,7 +9,7 @@ namespace VendingMachines.Shared.DTOs.User
     {
         public string Token;
         public DateTime ExpiryDate;
-        public string Username { get; set; }
+        public string FullName { get; set; }
         public string RoleSystemName {  get; set; }
         public bool IsGuest { get; set; }
     }

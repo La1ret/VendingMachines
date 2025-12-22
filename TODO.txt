@@ -11,3 +11,15 @@
 Изменить в userService использование models на DTO (app)
 
 В самом конце проверить UI по листику
+
+
+
+Вспомогательное
+
+Remove-Migration -StartupProject VendingMachines.API -Project VendingMachines.Infrastructure
+Add-Migration InitialCreate -StartupProject VendingMachines.API -Project VendingMachines.Infrastructure -OutputDir Data/Migrations
+Update-Database -StartupProject VendingMachines.API -Project VendingMachines.Infrastructure
+
+
+#region
+#endregion

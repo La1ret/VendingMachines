@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VendingMachines.Domain.Security;
 
 namespace VendingMachines.Infrastructure.Authentication
 {
-    internal class PasswordHasher
+    public class PasswordHasher : IPasswordHasher
     {
         /// <summary>
         /// Создает безопасный хеш пароля с автоматически сгенерированной солью.
         /// </summary>
         /// <param name="password">Пароль в открытом виде.</param>
         /// <returns>Хеш пароля, готовый для хранения в БД.</returns>
-        public static string HashPassword(string password)
+        public string HashPassword(string password)
         {
             return BCrypt.Net.BCrypt.HashPassword(password);
         }
@@ -24,7 +25,7 @@ namespace VendingMachines.Infrastructure.Authentication
         /// <param name="providedPassword">Пароль, введенный пользователем.</param>
         /// <param name="hashedPassword">Хеш, извлеченный из базы данных.</param>
         /// <returns>True, если пароли совпадают, иначе False.</returns>
-        public static bool VerifyPassword(string providedPassword, string hashedPassword)
+        public bool VerifyPassword(string providedPassword, string hashedPassword)
         {
             return BCrypt.Net.BCrypt.Verify(providedPassword, hashedPassword);
         }

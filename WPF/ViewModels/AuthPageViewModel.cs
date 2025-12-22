@@ -7,11 +7,12 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using VendingMachines.Shared.DTOs.User;
+using VendingMachines.Views.Pages;
+using VendingMachines.Views.Windows;
 using VendingMachines.WPF.Common.Base;
 using VendingMachines.WPF.Services;
 using VendingMachines.WPF.Services.IServices;
-using VendingMachines.Views.Pages;
-using VendingMachines.Views.Windows;
 
 namespace VendingMachines.ViewModels
 {
@@ -194,8 +195,10 @@ namespace VendingMachines.ViewModels
         {
             AuthStatusMessage = "";
             await Task.Delay(150); //Для того чтоб пользователь видел что сообщение сменилось (если на такое же)
+            
+            var signInRequest = new UserSignInRequest { Username = _username, Password = _password };
 
-            var result = await _authService.AuthenticateAsync(_username, _password);
+            var result = await _authService.AuthenticateAsync(signInRequest);
             if (result.IsSuccess)
             {
                 _navigationService.ChangeWindowTo<MainWindow>();

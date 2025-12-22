@@ -48,6 +48,5 @@ namespace VendingMachines.Domain.Models
 
         //Для временного запрета ввода пароля
         public DateTime? LockoutEnd { get; set; }
-
     }
 }

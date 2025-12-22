@@ -5,7 +5,7 @@ using System.Text;
 
 namespace VendingMachines.Shared.DTOs.User
 {
-    public class UserLoginRequest
+    public class UserSignInRequest
     {
         [Required(ErrorMessage = "Имя пользователя (логин) обязательно!")]
         public string Username { get; set; }
