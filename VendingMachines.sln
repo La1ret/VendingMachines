@@ -1,9 +1,24 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36518.9 d17.14
+VisualStudioVersion = 17.14.36518.9
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachines", "VendingMachines\VendingMachines.csproj", "{A2FDA8A4-D9F2-494F-9D57-594BCE59CADF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachines.API", "API\VendingMachines.API.csproj", "{A19B36A1-7B92-4C51-A9CA-2C555CC87F29}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{754FC069-D67B-A9D7-50A1-8D1CA196D8F1}"
+	ProjectSection(SolutionItems) = preProject
+		TODO.txt = TODO.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachines.Domain", "Domain\VendingMachines.Domain.csproj", "{A74D8EC0-CF00-7860-DBA5-EBCCE8AEBF45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachines.Application", "Application\VendingMachines.Application.csproj", "{B9C5BD6A-B93B-706F-7D5C-FF87B910B790}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachines.Shared", "Shared\VendingMachines.Shared.csproj", "{70F91C8F-161D-2576-1A58-EEB6F6FD34DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachines.Infrastructure", "Infrastucture\VendingMachines.Infrastructure.csproj", "{0FE564C5-2B30-0EE7-61FC-00DC31207F7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachines.WPF", "WPF\VendingMachines.WPF.csproj", "{A2FDA8A4-D9F2-494F-9D57-594BCE59CADF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,6 +26,26 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A19B36A1-7B92-4C51-A9CA-2C555CC87F29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A19B36A1-7B92-4C51-A9CA-2C555CC87F29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A19B36A1-7B92-4C51-A9CA-2C555CC87F29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A19B36A1-7B92-4C51-A9CA-2C555CC87F29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A74D8EC0-CF00-7860-DBA5-EBCCE8AEBF45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A74D8EC0-CF00-7860-DBA5-EBCCE8AEBF45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A74D8EC0-CF00-7860-DBA5-EBCCE8AEBF45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A74D8EC0-CF00-7860-DBA5-EBCCE8AEBF45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9C5BD6A-B93B-706F-7D5C-FF87B910B790}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9C5BD6A-B93B-706F-7D5C-FF87B910B790}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9C5BD6A-B93B-706F-7D5C-FF87B910B790}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9C5BD6A-B93B-706F-7D5C-FF87B910B790}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70F91C8F-161D-2576-1A58-EEB6F6FD34DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70F91C8F-161D-2576-1A58-EEB6F6FD34DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70F91C8F-161D-2576-1A58-EEB6F6FD34DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70F91C8F-161D-2576-1A58-EEB6F6FD34DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FE564C5-2B30-0EE7-61FC-00DC31207F7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FE564C5-2B30-0EE7-61FC-00DC31207F7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FE564C5-2B30-0EE7-61FC-00DC31207F7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FE564C5-2B30-0EE7-61FC-00DC31207F7F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A2FDA8A4-D9F2-494F-9D57-594BCE59CADF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A2FDA8A4-D9F2-494F-9D57-594BCE59CADF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2FDA8A4-D9F2-494F-9D57-594BCE59CADF}.Release|Any CPU.ActiveCfg = Release|Any CPU

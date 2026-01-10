@@ -1,0 +1,25 @@
+
+Переписать AuthService так чтоб он не вызывал хэшер и интерфейс юзера(app)
+Сервис аутентификации в app должен получать дто и отдавать их ПЕРЕПИСАТЬ
+
+Добавить зависимости для инфраструктуры чтоб она могла собрать бд (Проверить!)
+
+Переделать чтоб сет не было в сервисе сессий (app)
+
+Проверить чё с текущим окном в нафигации (сервис в wpf)
+
+Изменить в userService использование models на DTO (app)
+
+В самом конце проверить UI по листику
+
+
+
+Вспомогательное
+
+Remove-Migration -StartupProject VendingMachines.API -Project VendingMachines.Infrastructure
+Add-Migration InitialCreate -StartupProject VendingMachines.API -Project VendingMachines.Infrastructure -OutputDir Data/Migrations
+Update-Database -StartupProject VendingMachines.API -Project VendingMachines.Infrastructure
+
+
+#region
+#endregion
